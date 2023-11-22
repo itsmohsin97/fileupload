@@ -4,9 +4,6 @@ const path = require('path');
 const multer = require('multer');
 const app = express();
 
-
-
-
 // Set up multer for file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -19,30 +16,28 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
-
 const directoryPath = path.join(__dirname, 'uploads');
 
 app.get('/', (req, res) => {
     fs.readdir(directoryPath, function (err, files) {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
-        } 
+        }
         let fileLinks = files.map(file => `<a href="/download/${file}">${file}</a>`);
-        res.send(fileLinks.join('<br>'));
+         res.send(fileLinks.join('<br>'));
     });
 });
 
 app.get('/download/:file(*)', (req, res) => {
-  var filePath = path.join(directoryPath, req.params.file);
+    var filePath = path.join(directoryPath, req.params.file);
 
-  res.download(filePath, req.params.file, (err) => {
-    if (err) {
-      res.status(500).send({
-        message: "Could not download the file. " + err,
-      });
-    }
-  });
+    res.download(filePath, req.params.file, (err) => {
+        if (err) {
+            res.status(500).send({
+                message: "Could not download the file. " + err,
+            });
+        }
+    });
 });
 
 
@@ -75,5 +70,5 @@ app.set('views', path.join(__dirname, 'views'));
 //
 
 app.listen(3000, () => {
-  console.log('Server is running at http://localhost:3000');
+    console.log('Server is running at http://localhost:3000');
 });

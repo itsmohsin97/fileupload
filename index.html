@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,5 +7,31 @@
 </head>
 <body>
   <h1>Builder</h1>
+</body>
+</html> -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index of</title>
+</head>
+<body>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+  </form>
+  <h2>Uploaded Files</h2>
+  <title>Index of</title>
+  <ul>
+    <% files.forEach(file => { %>
+      <li><%= file %></li>
+    <% }); %>
+  </ul>
 </body>
 </html>
